@@ -17,4 +17,14 @@ class Thread extends Model
     public function creator() {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * Add a reply to the thread.
+     *
+     * @param $reply
+     */
+    public function addReply($reply)
+    {
+        $this->replies()->create($reply);
+    }
 }
