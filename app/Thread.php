@@ -14,7 +14,7 @@ class Thread extends Model
     protected $guarded = [];
     
     public function path(){
-        return '/threads/' . $this->id;
+        return '/threads/' . $this->channel->slug . '/' . $this->id;
     }
 
     public function replies() {
@@ -23,6 +23,10 @@ class Thread extends Model
 
     public function creator() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function channel() {
+        return $this->belongsTo(Channel::class);
     }
 
     /**
