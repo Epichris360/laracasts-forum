@@ -21,7 +21,7 @@ class ThreadsController extends Controller
     public function index(Channel $channel, ThreadFilters $filters)
     {   
         $threads = $this->getThreads($channel, $filters);
-        
+
         return view('threads.index', compact('threads'));
     }
 
@@ -111,7 +111,7 @@ class ThreadsController extends Controller
     }
 
     protected function getThreads($channel, $filters) {
-        $threads = Thread::latest()->filter($filters);
+        $threads = Thread::with('channel')->latest()->filter($filters);
 
         if( $channel->exits ) {
             $thread->where('channel_id', $channel->id);
