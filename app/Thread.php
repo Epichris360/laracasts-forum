@@ -34,8 +34,11 @@ class Thread extends Model
      *
      * @param $reply
      */
-    public function addReply($reply)
-    {
+    public function addReply($reply) {
         $this->replies()->create($reply);
+    }
+    // query is an instance of the query builder!
+    public function scopeFilter($query, $filters) {
+        return $filters->apply($query);
     }
 }
