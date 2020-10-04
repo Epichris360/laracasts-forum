@@ -19,7 +19,7 @@ class Reply extends Model
     }
 
     public function favorites() {
-        return $this->morphMany(Favroite::class, 'favorited');
+        return $this->morphMany(Favorite::class, 'favorited');
     }
 
     public function favorite() {
@@ -27,5 +27,9 @@ class Reply extends Model
         if( !$this->favorites()->where($attributes)->exists() ){
             return $this->favorites()->create($attributes);
         }
+    }
+
+    public function isFavorited() {
+        return $this->favorites()->where('user_id', auth()->id())->exists();
     }
 }
