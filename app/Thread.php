@@ -24,6 +24,10 @@ class Thread extends Model
         static::addGlobalScope('owner', function($builder) {
             $builder->with('creator');
         });
+
+        static::deleting(function($thread) {
+            $thread->replies()->delete();
+        });
     }
     
     public function path(){
