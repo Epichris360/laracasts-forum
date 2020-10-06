@@ -20,6 +20,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * get route key name
+     * 
+     * can now use route model binding by user's name
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -36,4 +46,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function threads() {
+        return $this->hasMany(Thread::class)->latest();
+    }
 }
